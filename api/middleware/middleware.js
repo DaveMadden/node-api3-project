@@ -22,7 +22,7 @@ function validateUserId(req, res, next) {
       }
     })
     .catch(err => {
-      res.status(500).json({ message: "user not found" })
+      res.status(500).json({ message: `${err}`})
     })
 }
 
