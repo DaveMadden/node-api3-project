@@ -13,11 +13,16 @@ function validateUserId(req, res, next) {
   //if not, 404
   User.getById(req.params.id)
     .then(response => {
-      req.user = response;
-      next();
+      if (!response){
+        res.status(404).json({ message: "user not found" })
+      }
+      else{
+        req.user = response;
+        next();
+      }
     })
     .catch(err => {
-      res.status(404).json({ message: "user not found" })
+      res.status(500).json({ message: "user not found" })
     })
 }
 
